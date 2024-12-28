@@ -126,7 +126,7 @@ const roomsData = [
     { name: "Room 101 - Lecture Hall", nodeId: "NODE_001" },
     { name: "Room 162 - Lab", nodeId: "NODE_017" },
     { name: "Room 150 - Conference Room", nodeId: "NODE_041" },
-    { name: "Room 152 - Study Room", nodeId: "NODE_027" }
+    { name: "Room 152 - Study Room", nodeId: "NODE_267" }
 ];
 
 const departmentData = [
@@ -140,7 +140,7 @@ const othersData = [
     { name: "Ritaj - Service", nodeId: "NODE_101" },
     { name: "Abu Ahmad - Cafeteria", nodeId: "NODE_102" },
     { name: "Arab Bank - Service", nodeId: "NODE_103" },
-    { name: "Elevator - Service", nodeId: "NODE_104" }
+    { name: "Elevator - Service", nodeId: "NODE_470" }
 ];
 
 let currentMarker = null;
@@ -299,21 +299,46 @@ export function initializeRouteModal(map, graph, nodesData, dijkstra, getCurrent
      // Helper function to find closest node on current floor
      function findFloorSpecificClosestNode(coordinates) {
         const floor = getCurrentFloor();
-        console.log('Current floor:', floor); // Debug log
+        
         
         const targetFloor = floor === 'basement' ? '-1' : 
                           floor === 'ground' ? '0' :
                           floor === 'first' ? '1' : 
                           floor === 'second' ? '2' : floor;
         
-        console.log('Target floor:', targetFloor); // Debug log
-
+        
+    
+        // Add warning message if floor is not 'ground'
+        if (floor !== 'ground') {
+            const warningDiv = document.createElement('div');
+            warningDiv.className = 'warning-message';
+            warningDiv.innerHTML = `
+                <div class="warning-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Please be aware that selecting a floor other than 0 will position your location within the Arts Faculty building </span>
+                </div>
+            `;
+            document.body.appendChild(warningDiv);
+    
+            // Remove the warning after 7 seconds
+            setTimeout(() => {
+                warningDiv.classList.add('fade-out');
+                setTimeout(() => {
+                    warningDiv.remove();
+                }, 300); // Match this with the CSS transition duration
+            }, 7000);
+        }
+    
         let closestNode = null;
         let minDistance = Infinity;
-
+    
         nodesData.features.forEach(node => {
             if (node.properties.Floor !== targetFloor) return;
-
+    
             const nodeCoords = [node.properties.X, node.properties.Y];
             const distance = Math.sqrt(
                 Math.pow(coordinates[0] - nodeCoords[0], 2) + 
@@ -325,7 +350,7 @@ export function initializeRouteModal(map, graph, nodesData, dijkstra, getCurrent
                 closestNode = node.properties.NODE_ID;
             }
         });
-
+    
         console.log('Found closest node:', closestNode); // Debug log
         return closestNode;
     }
@@ -886,7 +911,7 @@ document.addEventListener('click', (e) => {
 
         closeModal();
 
-        console.log('Starting route calculation with:', { startNodeId, endNodeId }); // Debug log
+        
 
         if (!startNodeId || !endNodeId) {
             alert("Please select valid locations from the dropdowns");
@@ -935,7 +960,7 @@ document.addEventListener('click', (e) => {
         
         const route = dijkstra(graph, nodesData, startNodeId, endNodeId, timeData);
 
-        console.log('Estimated time:', timeData.minutes, 'minutes and', timeData.seconds, 'seconds');
+        
     
         if (route.length === 0) {
             alert("No route found between the specified nodes.");
@@ -969,11 +994,11 @@ document.addEventListener('click', (e) => {
         // New floor means a new step
         if (currentStep.length > 0) {
             steps.push(currentStep);
-            console.log('Step added:', currentStep);
+            
         }
         currentStep = [nodeID];
         currentFloor = floor;
-        console.log('New floor detected:', floor);
+        
     } else {
         currentStep.push(nodeID);
     }
@@ -982,10 +1007,10 @@ document.addEventListener('click', (e) => {
 // Add the last step if there are nodes in currentStep
 if (currentStep.length > 0) {
     steps.push(currentStep);
-    console.log('Final step added:', currentStep);
+    
 }
 
-console.log('All Steps:', steps);
+
     
         // Step 2: Visualize the route on the map
         const routeGeoJSON = createRouteGeoJSON(routeCoordinates);
