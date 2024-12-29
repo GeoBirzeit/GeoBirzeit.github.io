@@ -109,9 +109,10 @@ function addRouteToMap(map, routeGeoJSON) {
 
 // Sample data arrays for categories
 const buildingsData = [
-    { name: "Azeez Shaheen Arts Building / عزيز شاهين مبنى الاداب", nodeId: "NODE_014" },
-    { name: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building / مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية", nodeId: "NODE_315" },
-    { name: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING / مبنى شوكي عزيز شاهين / مبنى قاعات الجامعة", nodeId: "NODE_316" },
+    { name: "Azeez Shaheen Arts Building\nعزيز شاهين مبنى الاداب", nodeId: "NODE_014" },
+    { name: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", nodeId: "NODE_315" },
+     { name: "مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية", nodeId: "NODE_315" },
+    { name_En: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING",name_En: "مبنى شوكي عزيز شاهين / مبنى قاعات الجامعة", nodeId: "NODE_316" },
     { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES / مملكة البحرين مبنى لدراسات المرأة", nodeId: "NODE_297" },
     { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES / مملكة البحرين مبنى لدراسات المرأة", nodeId: "NODE_296" }
 ];
