@@ -116,7 +116,7 @@ const buildingsData = [
 ];
 
 const doctorsData = [
-    { name: "Dr. Smith - Computer Science", nodeId: "NODE_010" },
+    { name: "Dr. Smith - Computer Science", nodeId: "NODE_011" },
     { name: "Dr. Johnson - Mathematics", nodeId: "NODE_017" },
     { name: "Dr. Williams - Physics", nodeId: "NODE_034" },
     { name: "Dr. Brown - Engineering", nodeId: "NODE_061" }
