@@ -110,9 +110,15 @@ function addRouteToMap(map, routeGeoJSON) {
 // Sample data arrays for categories
 const buildingsData = [
     { 
-        name_EN: "Azeez Shaheen Arts Building", 
-        name_AR: "عزيز شاهين مبنى الاداب", 
+        name: "Azeez Shaheen Arts Building",
+        name_AR: "عزيز شاهين مبنى الاداب",
         nodeId: [NODE_014, NODE_472, NODE_473] 
+        
+    },
+    { 
+        name : "عزيز شاهين مبنى الاداب",
+        nodeId: [NODE_014, NODE_472, NODE_473] 
+        
     },
     { 
         name_EN: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", 
