@@ -109,11 +109,14 @@ function addRouteToMap(map, routeGeoJSON) {
 
 // Sample data arrays for categories
 const buildingsData = [
-    { name: "nnnn", nodeId: "NODE_010" }
+    { name: "Engineering Building", nodeId: "NODE_001" },
+    { name: "Science Building", nodeId: "NODE_015" },
+    { name: "Library", nodeId: "NODE_227" },
+    { name: "Administration Building", nodeId: "NODE_035" }
 ];
 
 const doctorsData = [
-
+    { name: "nnnn", nodeId: "NODE_010" },
     { name: "Dr. Johnson - Mathematics", nodeId: "NODE_017" },
     { name: "Dr. Williams - Physics", nodeId: "NODE_034" },
     { name: "Dr. Brown - Engineering", nodeId: "NODE_061" }
