@@ -109,11 +109,38 @@ function addRouteToMap(map, routeGeoJSON) {
 
 // Sample data arrays for categories
 const buildingsData = [
-    { name: "Engineering Building", nodeId: "NODE_001" },
-    { name: "Science Building", nodeId: "NODE_015" },
-    { name: "Library", nodeId: "NODE_227" },
-    { name: "Administration Building", nodeId: "NODE_035" }
+    { 
+        name_EN: "Azeez Shaheen Arts Building", 
+        name_AR: "عزيز شاهين مبنى الاداب", 
+        nodeId: ["NODE_014", "NODE_472", "NODE_473"] 
+    },
+    { 
+        name_EN: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", 
+        name_AR: "مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية", 
+        nodeId: ["NODE_315"] 
+    },
+    { 
+        name_EN: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING", 
+        name_AR: "مبنى شوكي عزيز شاهين / مبنى قاعات الجامعة", 
+        nodeId: ["NODE_316"] 
+    },
+    { 
+        name_EN: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES", 
+        name_AR: "مملكة البحرين مبنى لدراسات المرأة", 
+        nodeId: ["NODE_297", "NODE_296"] 
+    },
+    { 
+        name_EN: "SAID KHOURY BUILDING FOR DEVELOPMENT STUDIES", 
+        name_AR: "سعيد خوري مبنى لدراسات التنمية", 
+        nodeId: ["NODE_295"] 
+    },
+    { 
+        name_EN: "Mohammed Al-Masrouji Media Building", 
+        name_AR: "مبنى محمد المسروجي الإعلامي", 
+        nodeId: ["NODE_298", "NODE_299"] 
+    }
 ];
+
 
 const doctorsData = [
     { name: "Dr. Smith - Computer Science", nodeId: "NODE_010" },
