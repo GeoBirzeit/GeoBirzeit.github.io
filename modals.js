@@ -319,7 +319,7 @@ export function initializeRouteModal(map, graph, nodesData, dijkstra, getCurrent
                         <line x1="12" y1="9" x2="12" y2="13"></line>
                         <line x1="12" y1="17" x2="12.01" y2="17"></line>
                     </svg>
-                    <span>Please be aware that selecting a floor other than 0 will position your location within the Arts Faculty building </span>
+                    <span>Please be aware that selecting a floor other than 0 will position your location automatically within the Arts Faculty building </span>
                 </div>
             `;
             document.body.appendChild(warningDiv);
