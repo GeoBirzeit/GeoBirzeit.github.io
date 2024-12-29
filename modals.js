@@ -111,7 +111,6 @@ function addRouteToMap(map, routeGeoJSON) {
 const buildingsData = [
     { 
         name: "Azeez Shaheen Arts Building",
-        name_AR: "عزيز شاهين مبنى الاداب",
         nodeId: [NODE_014, NODE_472, NODE_473] 
         
     },
