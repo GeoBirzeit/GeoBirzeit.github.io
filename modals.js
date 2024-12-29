@@ -109,56 +109,7 @@ function addRouteToMap(map, routeGeoJSON) {
 
 // Sample data arrays for categories
 const buildingsData = [
-    { 
-        nodeId: "NODE_014", 
-        name_EN: "Azeez Shaheen Arts Building", 
-        name_AR: "عزيز شاهين مبنى الاداب" 
-    },
-    { 
-        nodeId: "NODE_472", 
-        name_EN: "Azeez Shaheen Arts Building", 
-        name_AR: "عزيز شاهين مبنى الاداب" 
-    },
-    { 
-        nodeId: "NODE_473", 
-        name_EN: "Azeez Shaheen Arts Building", 
-        name_AR: "عزيز شاهين مبنى الاداب" 
-    },
-    { 
-        nodeId: "NODE_315", 
-        name_EN: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", 
-        name_AR: "مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية" 
-    },
-    { 
-        nodeId: "NODE_316", 
-        name_EN: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING", 
-        name_AR: "مبنى شوكي عزيز شاهين / مبنى قاعات الجامعة" 
-    },
-    { 
-        nodeId: "NODE_297", 
-        name_EN: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES", 
-        name_AR: "مملكة البحرين مبنى لدراسات المرأة" 
-    },
-    { 
-        nodeId: "NODE_296", 
-        name_EN: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES", 
-        name_AR: "مملكة البحرين مبنى لدراسات المرأة" 
-    },
-    { 
-        nodeId: "NODE_295", 
-        name_EN: "SAID KHOURY BUILDING FOR DEVELOPMENT STUDIES", 
-        name_AR: "سعيد خوري مبنى لدراسات التنمية" 
-    },
-    { 
-        nodeId: "NODE_298", 
-        name_EN: "Mohammed Al-Masrouji Media Building", 
-        name_AR: "مبنى محمد المسروجي الإعلامي" 
-    },
-    { 
-        nodeId: "NODE_299", 
-        name_EN: "Mohammed Al-Masrouji Media Building", 
-        name_AR: "مبنى محمد المسروجي الإعلامي" 
-    }
+    { name: "Dr. Smith - Computer Science", nodeId: "NODE_018" },
 ];
 
 const doctorsData = [
