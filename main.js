@@ -518,9 +518,9 @@ map.on('load', function() {
             });
     
             // Show nodes and edges
-            map.setLayoutProperty('nodes-layer', 'visibility', 'visible');
-            map.setLayoutProperty('edges-layer', 'visibility', 'visible');
-            map.setLayoutProperty('node-labels', 'visibility', 'visible');
+            //map.setLayoutProperty('nodes-layer', 'visibility', 'visible');
+            //map.setLayoutProperty('edges-layer', 'visibility', 'visible');
+            //map.setLayoutProperty('node-labels', 'visibility', 'visible');
             
             map.flyTo({ center: [35.1826, 31.96065], zoom: 20.5 });
             currentView = 'nodes-edges';
