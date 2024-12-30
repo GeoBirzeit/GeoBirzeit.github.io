@@ -169,7 +169,7 @@ export function buildGraph(edgesData) {
     edgesData.features.forEach(function(edge) {
         const from = edge.properties.Start_NODE;
         const to = edge.properties.End_NODE;
-        const weight = edge.properties.Shape_Length;
+        const weight = edge.properties.Distance;
 
         if (!graph[from]) graph[from] = [];
         if (!graph[to]) graph[to] = [];
