@@ -109,40 +109,184 @@ function addRouteToMap(map, routeGeoJSON) {
 
 // Sample data arrays for categories
 const buildingsData = [
-    { name: "Azeez Shaheen Arts Building\nعزيز شاهين مبنى الاداب", nodeId: "NODE_014" },
+    { name: "Azeez Shaheen Arts Building", nodeId: "NODE_011" },
     { name: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", nodeId: "NODE_315" },
-    { name: "مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية", nodeId: "NODE_315" },
+    { name: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING", nodeId: "NODE_316" },
+    { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES", nodeId: "NODE_640" },
+    { name: "SAID KHOURY BUILDING FOR DEVELOPMENT STUDIES", nodeId: "NODE_295" },
+    { name: "Mohammed Al-Masrouji Media Building", nodeId: "NODE_641" },
+    { name: "Muneeb Rashid Al Masry for Construction / Information Technology Building", nodeId: "NODE_294" },
+    { name: "Mohammed Imran Bamia Building/Education Building", nodeId: "NODE_292" },
+    { name: "Riyadh Tawfiq Al-Sadiq Building / Law and Public Administration Building", nodeId: "NODE_291" },
+    { name: "Naseeb Azeez Shaheen Auditorium", nodeId: "NODE_301" },
+    { name: "Ghaleb Younis Building / Pharmacy, Nursing and Health Professions Building", nodeId: "NODE_300" },
+    { name: "Samir Awida Building / Art, Music and Design Building", nodeId: "NODE_305" },
+    { name: "Engineering workshop building", nodeId: "NODE_308" },
+    { name: "Omar Al-Aggad Engineering Building", nodeId: "NODE_631" },
+    { name: "Law Building", nodeId: "NODE_336" },
+    { name: "Walid and Helen Kattan Building", nodeId: "NODE_335" },
+    { name: "Naseeb Shaheen Building/Graduate Studies Building", nodeId: "NODE_327" },
+    { name: "Abdul Rahman Al-Jeraisy Building / College of Business and Economics Building", nodeId: "NODE_324" },
+    { name: "Abdul Rahman Al-Jeraisy Building / College of Business and Economics Building", nodeId: "NODE_326" },
+    { name: "Abdul Hadi Building / Business and Economics Building2", nodeId: "NODE_325" },
+    { name: "Sameer Abdel Hadi Building/Science Building - Mathematics Wing", nodeId: "NODE_317" },
+    { name: "Faculty of Science Building", nodeId: "NODE_643" },
 
-    { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES / مملكة البحرين مبنى لدراسات المرأة", nodeId: "NODE_297" },
-    { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES / مملكة البحرين مبنى لدراسات المرأة", nodeId: "NODE_296" }
+    // Arabic names
+    { name: "عزيز شاهين مبنى الاداب", nodeId: "NODE_011" },
+    { name: "مبنى محمد بامية ووليد كيالي / مبنى التربية البدنية", nodeId: "NODE_315" },
+    { name: "مبنى شوكي عزيز شاهين / مبنى قاعات الجامعة", nodeId: "NODE_316" },
+    { name: "مملكة البحرين مبنى لدراسات المرأة", nodeId: "NODE_640" },
+    { name: "سعيد خوري مبنى لدراسات التنمية", nodeId: "NODE_295" },
+    { name: "مبنى محمد المسروجي الإعلامي", nodeId: "NODE_641" },
+    { name: "منيب راشد المصري للبناء / مبنى تكنولوجيا المعلومات", nodeId: "NODE_294" },
+    { name: "محمد عمران مبنى بامية/ مبنى التعليم", nodeId: "NODE_292" },
+    { name: "مبنى رياض توفيق الصادق/ مبنى القانون والادارة العامة", nodeId: "NODE_291" },
+    { name: "قاعة نسيب عزيز شاهين - المسرح", nodeId: "NODE_301" },
+    { name: "مبنى غالب يونس / مبنى صيدلية والتمريض ومهن صحية", nodeId: "NODE_300" },
+    { name: "مبنى سمير عويضة / مبنى الفن والموسيقى والتصميم", nodeId: "NODE_305" },
+    { name: "مبنى الورش الهندسية", nodeId: "NODE_308" },
+    { name: "مبنى عمر العقاد للهندسة", nodeId: "NODE_631" },
+    { name: "مبنى الحقوق", nodeId: "NODE_336" },
+    { name: "مبنى وليد وهيلين قطان", nodeId: "NODE_335" },
+    { name: "مبنى نسيب شاهين /مبنى الدراسات العليا", nodeId: "NODE_327" },
+    { name: "مبنى عبد الرحمن الجريسي / مبنى كلية الأعمال والاقتصاد/التجارة", nodeId: "NODE_324" },
+    { name: "مبنى عبد الرحمن الجريسي / مبنى كلية الأعمال والاقتصاد/التجارة", nodeId: "NODE_326" },
+    { name: "مبنى عبد الهادي / مبنى الأعمال والاقتصاد2", nodeId: "NODE_325" },
+    { name: "سمير عبد الهادي مبنى/علوم مبنى - جناح الرياضيات", nodeId: "NODE_317" },
+    { name: "مبنى كلية العلوم", nodeId: "NODE_643" }
 ];
 
+
 const doctorsData = [
-    { name: "3", nodeId: "NODE_010" },
-    { name: "Dr. Johnson - Mathematics", nodeId: "NODE_017" },
-    { name: "Dr. Williams - Physics", nodeId: "NODE_034" },
-    { name: "Dr. Brown - Engineering", nodeId: "NODE_061" }
+    // English names
+    { name: "Secretary", nodeId: "NODE_063" },
+    { name: "Abdel Halim Tumeiza", nodeId: "NODE_062" },
+    { name: "Marwan Ghaleb Marwan Ghaleb Abdelmohsen Ghaleb", nodeId: "NODE_066" },
+    { name: "Othman Ali Othman Sharkas", nodeId: "NODE_069" },
+    { name: "Mohammad Tayseer Mohammad Kattaneh", nodeId: "NODE_069" },
+    { name: "Hussein Ahmad Hussein Rimawi", nodeId: "NODE_071" },
+    { name: "Abdullah Saeed Naji Harzallah", nodeId: "NODE_065" },
+    { name: "Ahmad Rifaat Mohammad Noubani", nodeId: "NODE_065" },
+    { name: "Khalil Abdullah Mutawa Amro", nodeId: "NODE_068" },
+    { name: "Omar Li Loren Tisdale", nodeId: "NODE_070" },
+
+    // Arabic names
+    { name: "سكرتيرة", nodeId: "NODE_063" },
+    { name: "عبد الحليم طميزة", nodeId: "NODE_062" },
+    { name: "مروان غالب مروان غالب عبدالمحسن غالب", nodeId: "NODE_066" },
+    { name: "عثمان علي عثمان شركس", nodeId: "NODE_069" },
+    { name: "محمد تيسير محمد كتانة", nodeId: "NODE_069" },
+    { name: "حسين أحمد حسين ريماوي", nodeId: "NODE_071" },
+    { name: "عبدالله سعيد ناجي حرزالله", nodeId: "NODE_065" },
+    { name: "أحمد رفعت محمد نوباني", nodeId: "NODE_065" },
+    { name: "خليل عبدالله مطاوع عمرو", nodeId: "NODE_068" },
+    { name: "عمر لي لورين تسدال", nodeId: "NODE_070" }
 ];
 
 const roomsData = [
-    { name: "Room 101 - Lecture Hall", nodeId: "NODE_001" },
-    { name: "Room 162 - Lab", nodeId: "NODE_017" },
-    { name: "Room 150 - Conference Room", nodeId: "NODE_041" },
-    { name: "Room 152 - Study Room", nodeId: "NODE_267" }
+    // English names
+    { name: "Class - 101", nodeId: "NODE_035" },
+    { name: "Class - 102", nodeId: "NODE_001" },
+    { name: "Class - 112", nodeId: "NODE_034" },
+    { name: "Class - 116", nodeId: "NODE_010" },
+    { name: "Class - 150", nodeId: "NODE_038" },
+    { name: "Class - 152", nodeId: "NODE_025" },
+    { name: "Class - 152", nodeId: "NODE_027" },
+    { name: "Class - 162", nodeId: "NODE_021" },
+    { name: "Class - 162", nodeId: "NODE_017" },
+    { name: "Class - 202", nodeId: "NODE_086" },
+    { name: "Class - 206", nodeId: "NODE_088" },
+    { name: "Class - 212", nodeId: "NODE_079" },
+    { name: "Class - 216", nodeId: "NODE_081" },
+    { name: "Class - 252", nodeId: "NODE_052" },
+    { name: "Class - 256", nodeId: "NODE_054" },
+    { name: "Class - 262", nodeId: "NODE_046" },
+    { name: "Class - 266", nodeId: "NODE_048" },
+    { name: "Class - 062", nodeId: "NODE_112" },
+    { name: "Class - 064", nodeId: "NODE_109" },
+    { name: "Lab - 002", nodeId: "NODE_137" },
+    { name: "Lab - 004", nodeId: "NODE_135" },
+    { name: "Lab - 230", nodeId: "NODE_092" },
+    { name: "Lab - 231", nodeId: "NODE_091" },
+    { name: "Lab - 232", nodeId: "NODE_059" },
+    { name: "Lab - 233", nodeId: "NODE_060" },
+    { name: "Printing Press of Arts", nodeId: "NODE_037" },
+    { name: "Male Prayer Room", nodeId: "NODE_119" },
+    { name: "Female Prayer Room", nodeId: "NODE_121" },
+    { name: "Arts Cafeteria", nodeId: "NODE_102" },
+    { name: "Arts Cafeteria", nodeId: "NODE_105" },
+    { name: "Geography Library", nodeId: "NODE_089" },
+
+    // Arabic names
+    { name: "مطبعة الاداب", nodeId: "NODE_037" },
+    { name: "مصلى الذكور", nodeId: "NODE_119" },
+    { name: "مصلى الاناث", nodeId: "NODE_121" },
+    { name: "كافيتيريا الاداب", nodeId: "NODE_102" },
+    { name: "كافيتيريا الاداب", nodeId: "NODE_105" },
+    { name: "مكتبة الجغرافيا", nodeId: "NODE_089" }
 ];
 
 const departmentData = [
-    { name: "Arabic Department", nodeId: "NODE_091" },
-    { name: "English Department", nodeId: "NODE_057" },
-    { name: "IT Department", nodeId: "NODE_051" },
-    { name: "Science Department", nodeId: "NODE_037" }
+    // English names
+    { name: "Geography and Geoinformatics", nodeId: "NODE_627" },
+    { name: "Philosophy", nodeId: "NODE_248" },
+    { name: "Translation", nodeId: "NODE_205" },
+    { name: "History and Archaeology", nodeId: "NODE_227" },
+    { name: "English Language", nodeId: "NODE_147" },
+    { name: "Arabic Language", nodeId: "NODE_168" },
+
+    // Arabic names
+    { name: "الجغرافيا والجيوانفورماتكس", nodeId: "NODE_627" },
+    { name: "الفلسفة", nodeId: "NODE_248" },
+    { name: "الترجمة", nodeId: "NODE_205" },
+    { name: "التاريخ والاثار", nodeId: "NODE_227" },
+    { name: "اللغة الانجليزية", nodeId: "NODE_147" },
+    { name: "العربي", nodeId: "NODE_168" }
 ]
 
 const othersData = [
-    { name: "Ritaj - Service", nodeId: "NODE_101" },
-    { name: "Abu Ahmad - Cafeteria", nodeId: "NODE_102" },
-    { name: "Arab Bank - Service", nodeId: "NODE_103" },
-    { name: "Elevator - Service", nodeId: "NODE_470" }
+    // English names
+    { name: "Najad Zini Center of Excellence", nodeId: "NODE_293" },
+    { name: "Samih Darwazeh Pharmaceutical Industries Institute", nodeId: "NODE_546" },
+    { name: "The Palestinian Museum", nodeId: "NODE_302" },
+    { name: "Ali Al-Hajj Stadium", nodeId: "NODE_314" },
+    { name: "Electric Generator", nodeId: "NODE_313" },
+    { name: "Sheikh Rashid Bin Saeed Al Maktoum Building / Student Complex", nodeId: "NODE_633" },
+    { name: "Book Store", nodeId: "NODE_290" },
+    { name: "The Bank", nodeId: "NODE_289" },
+    { name: "Kamal Nasser Hall", nodeId: "NODE_283" },
+    { name: "Retaj Hall", nodeId: "NODE_284" },
+    { name: "Administration and Finance Building", nodeId: "NODE_282" },
+    { name: "Administration and Finance Building", nodeId: "NODE_281" },
+    { name: "Student lounge", nodeId: "NODE_285" },
+    { name: "Deanship of Student Affairs", nodeId: "NODE_618" },
+    { name: "Yousef Ahmed Alghanim Library", nodeId: "NODE_638" },
+    { name: "Birzeit University Museum", nodeId: "NODE_322" },
+    { name: "Abu Ahmed Cafeteria", nodeId: "NODE_642" },
+    { name: "Al-Zaim Cafeteria", nodeId: "NODE_334" },
+    { name: "Al-Sheni store", nodeId: "NODE_288" },
+
+    // Arabic names
+    { name: "مركز نجاد زيني للتميز", nodeId: "NODE_293" },
+    { name: "معهد سميح دروزة للصناعات الدوائية", nodeId: "NODE_546" },
+    { name: "المتحف الفلسطيني", nodeId: "NODE_302" },
+    { name: "ملعب علي الحاج", nodeId: "NODE_314" },
+    { name: "مولد كهربائي", nodeId: "NODE_313" },
+    { name: "الشيخ راشد بن سعيد مبنى آل مكتوم / مجمع الطلاب", nodeId: "NODE_633" },
+    { name: "مخزن الكتب", nodeId: "NODE_290" },
+    { name: "البنك", nodeId: "NODE_289" },
+    { name: "قاعة كمال ناصر", nodeId: "NODE_283" },
+    { name: "قاعة ريتاج", nodeId: "NODE_284" },
+    { name: "مبنى الادارة والمالية", nodeId: "NODE_282" },
+    { name: "مبنى الادارة والمالية", nodeId: "NODE_281" },
+    { name: "استراحة الطلبة", nodeId: "NODE_285" },
+    { name: "عمادة شؤون الطلبة", nodeId: "NODE_618" },
+    { name: "مكتبة يوسف أحمد الغانم", nodeId: "NODE_638" },
+    { name: "متحف جامعة بيرزيت", nodeId: "NODE_322" },
+    { name: "كافتيريا ابو احمد", nodeId: "NODE_642" },
+    { name: "كافتيريا الزعيم", nodeId: "NODE_334" },
+    { name: "الشني", nodeId: "NODE_288" }
 ];
 
 let currentMarker = null;
