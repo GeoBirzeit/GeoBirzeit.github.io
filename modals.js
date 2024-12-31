@@ -184,6 +184,7 @@ const doctorsData = [
 
 const roomsData = [
     // English names
+    { name: "A.Shaheen - Main Entrance", nodeId: "NODE_014" },
     { name: "A.Shaheen - Class - 101", nodeId: "NODE_035" },
     { name: "A.Shaheen - Class - 102", nodeId: "NODE_001" },
     { name: "A.Shaheen - Class - 112", nodeId: "NODE_034" },
@@ -217,6 +218,7 @@ const roomsData = [
     { name: "Geography Library", nodeId: "NODE_089" },
 
     // Arabic names
+    { name: "A.Shaheen - المدخل الرئيسي", nodeId: "NODE_014" },
     { name: "مطبعة الاداب", nodeId: "NODE_037" },
     { name: "مصلى الذكور", nodeId: "NODE_119" },
     { name: "مصلى الاناث", nodeId: "NODE_121" },
@@ -408,6 +410,15 @@ export function initializeRouteModal(map, graph, nodesData, dijkstra, getCurrent
     const fromNodeId = document.getElementById('fromNodeId');
     const toNodeId = document.getElementById('toNodeId');
 
+
+    const defaultLocation = "A.Shaheen - Main Entrance";
+    const defaultNodeId = "NODE_014";
+    
+    // Set input values
+    fromNodeInput.value = defaultLocation;
+    fromNodeId.value = defaultNodeId;
+
+    
     const timeData = {};
     let timeMinutes = 0;
     let remainingSeconds = 0;
@@ -996,23 +1007,9 @@ document.querySelectorAll('.category-btn').forEach(btn => {
     });
 });
 
-/*
 
-document.addEventListener('click', (e) => {
-    const fromDropdownArea = fromNodeDropdown.contains(e.target) || fromNodeInput.contains(e.target);
-    const toDropdownArea = toNodeDropdown.contains(e.target) || toNodeInput.contains(e.target);
 
-    // Only hide if dropdowns are visible and click is outside
-    if (fromNodeDropdown.style.display === 'block' && !fromDropdownArea) {
-        fromNodeDropdown.style.display = 'none';
-    }
-    if (toNodeDropdown.style.display === 'block' && !toDropdownArea) {
-        toNodeDropdown.style.display = 'none';
-    }
-});
-
-*/
-    
+ 
         // Set up input listeners
         fromNodeInput.addEventListener('input', (e) => {
             updateDropdown(fromNodeInput, fromNodeDropdown, fromNodeId, currentFromCategory, e.target.value);
