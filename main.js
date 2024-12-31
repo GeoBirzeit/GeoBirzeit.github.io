@@ -502,41 +502,13 @@ map.on('load', function() {
             map.flyTo({ center: [35.1826, 31.96065], zoom: 20.5 });
             currentView = 'floor-view';
     
-        } else if (currentView === 'floor-view') {
+        } else {
             // Hide all floor layers
             map.setLayoutProperty('ground-floor-3d', 'visibility', 'none');
             map.setLayoutProperty('first-floor-3d', 'visibility', 'none');
             map.setLayoutProperty('basement-floor-3d', 'visibility', 'none');
             map.setLayoutProperty('second-floor-3d', 'visibility', 'none');
             map.setLayoutProperty('stairs-3d', 'visibility', 'none');
-    
-            // Hide all room layers for all floors
-            ['ground', 'first', 'basement', 'second'].forEach(floor => {
-                map.setLayoutProperty(`rooms-${floor}-3d`, 'visibility', 'none');
-                map.setLayoutProperty(`room-labels-${floor}`, 'visibility', 'none');
-                map.setLayoutProperty(`highlighted-room-${floor}`, 'visibility', 'none');
-            });
-    
-            // Show nodes and edges
-            //map.setLayoutProperty('nodes-layer', 'visibility', 'visible');
-            //map.setLayoutProperty('edges-layer', 'visibility', 'visible');
-            //map.setLayoutProperty('node-labels', 'visibility', 'visible');
-            
-            map.flyTo({ center: [35.1826, 31.96065], zoom: 20.5 });
-            currentView = 'nodes-edges';
-    
-        } else if (currentView === 'nodes-edges') {
-            // Hide all floor layers
-            map.setLayoutProperty('ground-floor-3d', 'visibility', 'none');
-            map.setLayoutProperty('first-floor-3d', 'visibility', 'none');
-            map.setLayoutProperty('basement-floor-3d', 'visibility', 'none');
-            map.setLayoutProperty('second-floor-3d', 'visibility', 'none');
-            map.setLayoutProperty('stairs-3d', 'visibility', 'none');
-            
-            // Hide nodes and edges
-            map.setLayoutProperty('nodes-layer', 'visibility', 'none');
-            map.setLayoutProperty('edges-layer', 'visibility', 'none');
-            map.setLayoutProperty('node-labels', 'visibility', 'none');
     
             // Hide all room layers for all floors
             ['ground', 'first', 'basement', 'second'].forEach(floor => {
