@@ -111,9 +111,9 @@ function addRouteToMap(map, routeGeoJSON) {
 const buildingsData = [
     { name: "Azeez Shaheen Arts Building", nodeId: "NODE_011" },
     { name: "Mohamed Bamieh and Waleed Kayyali Building / Physical Education Building", nodeId: "NODE_315" },
-    { name: "SHUKY AZEEZ SHAHEEN BUILDING / UNIVERSITY HALLS BUILDING", nodeId: "NODE_316" },
-    { name: "KINGDOM OF BAHRAIN BUILDING FOR WOMEN STUDIES", nodeId: "NODE_640" },
-    { name: "SAID KHOURY BUILDING FOR DEVELOPMENT STUDIES", nodeId: "NODE_295" },
+    { name: "Shuky Azeez Shaheen Building / University Halls Building", nodeId: "NODE_316" },
+    { name: "Kingdom Of Bahrain Building For Women Studies", nodeId: "NODE_640" },
+    { name: "Said Khoury Building For Development Studies", nodeId: "NODE_295" },
     { name: "Mohammed Al-Masrouji Media Building", nodeId: "NODE_641" },
     { name: "Muneeb Rashid Al Masry for Construction / Information Technology Building", nodeId: "NODE_294" },
     { name: "Mohammed Imran Bamia Building/Education Building", nodeId: "NODE_292" },
