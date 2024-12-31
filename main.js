@@ -526,7 +526,7 @@ map.on('load', function() {
             // Show common elements
             map.setLayoutProperty('stairs-3d', 'visibility', 'visible');
             
-            map.flyTo({ center: [35.1826, 31.96065], zoom: 20.5 });
+            map.flyTo({ center: [35.1826, 31.96065], zoom: 19.5 });
             currentView = 'floor-view';
     
         } else {
@@ -547,7 +547,7 @@ map.on('load', function() {
             // Show building
             map.setLayoutProperty('building-layer-3d', 'visibility', 'visible');
             
-            map.flyTo({ center: [35.1820, 31.96000], zoom: 17 });
+            map.flyTo({ center: [35.1820, 31.96000], zoom: 16 });
             currentView = 'building';
         }
     });
