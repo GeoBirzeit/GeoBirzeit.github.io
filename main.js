@@ -59,6 +59,9 @@ function findClosestNode(coordinates, nodesData) {
 }
 
 map.on('load', function() {
+    // Hide map initially while loading
+    map.getCanvas().style.opacity = '0';
+
     // Create an array to track loaded data sources
     const dataSources = [
         { url: 'assets/Basement_Floor.geojson', type: 'basement-floor' },  
@@ -73,9 +76,25 @@ map.on('load', function() {
         { url: 'assets/Rooms_G.geojson', type: 'rooms-ground' },
         { url: 'assets/Rooms_F.geojson', type: 'rooms-first' },
         { url: 'assets/Rooms_S.geojson', type: 'rooms-second' }
-    
     ];
 
+    // Function to hide loading screen
+    function hideLoadingScreen() {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.add('loading-screen-hidden');
+        // Show map
+        map.getCanvas().style.opacity = '1';
+        // Remove loading screen after transition
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }
+
+    // Function to show error on loading screen
+    function showLoadingError(message) {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.innerHTML = `<p class="error-message">${message}</p>`;
+    }
     // Function to load a single data source
     async function loadDataSource(sourceConfig) {
         try {
@@ -445,7 +464,15 @@ map.on('load', function() {
                 
                 // Set up room click handler with the extracted function
                 setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+            
+                hideLoadingScreen();
             }
+        })
+        .catch(error => {
+            console.error('Error loading map data:', error);
+            // Optionally show an error message on the loading screen
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.innerHTML = '<p>Error loading map data. Please refresh the page.</p>';
         });
 
     // Toggle View Button
