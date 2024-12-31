@@ -932,17 +932,18 @@ currentMarker.on('dragend', () => {
             dropdownElement.innerHTML = '';
             
             if (!category) return;
-    
+        
             const data = getCategoryData(category);
             const filteredItems = data.filter(item =>
                 item.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
-    
+        
             if (filteredItems.length > 0) {
                 filteredItems.forEach(item => {
                     const dropdownItem = document.createElement('div');
                     dropdownItem.classList.add('dropdown-item');
-                    dropdownItem.textContent = item.name;
+                    // Use innerHTML instead of textContent to preserve formatting
+                    dropdownItem.innerHTML = item.name;
                     dropdownItem.addEventListener('click', () => {
                         inputElement.value = item.name;
                         hiddenInput.value = item.nodeId;
@@ -954,8 +955,7 @@ currentMarker.on('dragend', () => {
             } else {
                 dropdownElement.style.display = 'none';
             }
-        } 
-        
+        }
        // Set up category buttons
 document.querySelectorAll('.category-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
