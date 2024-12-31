@@ -9,7 +9,7 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/hamedhadad/cm3xvrod9003g01sgap1cftwo',
     center: [35.1820, 31.96000],
-    zoom: 16,
+    zoom: 1,
     pitch: 0,
     bearing: 0,
     doubleClickZoom: false
