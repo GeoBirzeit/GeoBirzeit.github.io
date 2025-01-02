@@ -259,6 +259,7 @@ map.on('load', function() {
                     break;
 
                     case 'rooms-ground':
+                        console.log('Creating rooms-ground-3d layer');
                         map.addLayer({
                             id: 'rooms-ground-3d',
                             type: 'fill-extrusion',
@@ -307,9 +308,12 @@ map.on('load', function() {
                                 'text-halo-width': 2
                             }
                         });
+                        
+                        console.log('Initial opacity for rooms-ground-3d:', map.getPaintProperty('rooms-ground-3d', 'fill-extrusion-opacity'));
                         break;
                     
                     case 'rooms-basement':
+                        console.log('Creating rooms-basement-3d layer');
                         // Same structure as rooms-ground but with basement-specific IDs
                         map.addLayer({
                             id: 'rooms-basement-3d',
@@ -359,10 +363,12 @@ map.on('load', function() {
                                 'text-halo-width': 2
                             }
                         });
+                        console.log('Initial opacity for rooms-basement-3d:', map.getPaintProperty('rooms-basement-3d', 'fill-extrusion-opacity'));
                         break;
                     
                     case 'rooms-first':
                         // Same structure for first floor
+                        console.log('Creating rooms-first-3d layer');
                         map.addLayer({
                             id: 'rooms-first-3d',
                             type: 'fill-extrusion',
