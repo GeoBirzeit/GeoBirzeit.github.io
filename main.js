@@ -495,7 +495,7 @@ map.on('load', function() {
                 const getCurrentFloor = () => buildingFloor;
                 initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
 
-                map.once('idle', () => {
+                map.once('sourcedata', () => {
                     ['ground', 'first', 'basement', 'second'].forEach(floor => {
                         map.setPaintProperty(`rooms-${floor}-3d`, 'fill-extrusion-opacity', 0.3);
                     });
