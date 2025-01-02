@@ -34,6 +34,35 @@ const roomToNodeMapping = {
     // Add more mappings as needed
 };
 
+function initializeLayerOpacities() {
+    // Check if style is fully loaded
+    if (map.isStyleLoaded()) {
+        console.log('Style already loaded, initializing layers');
+        setOpacities();
+    } else {
+        console.log('Waiting for style to load');
+        map.on('style.load', () => {
+            console.log('Style loaded, initializing layers');
+            setOpacities();
+        });
+    }
+}
+
+function setOpacities() {
+    floors.forEach(floor => {
+        const { roomLayer, highlightLayer } = getLayerNames(floor);
+        
+        // Wait for source and layers to be actually available
+        if (map.getLayer(roomLayer)) {
+            console.log(`Setting initial opacity for ${roomLayer}`);
+            map.setPaintProperty(roomLayer, 'fill-extrusion-opacity', 0.3);
+            map.setPaintProperty(highlightLayer, 'fill-extrusion-opacity', 0);
+        } else {
+            console.warn(`Layer ${roomLayer} not yet available`);
+        }
+    });
+}
+
 function calculateDistance(point1, point2) {
     const [x1, y1] = point1;
     const [x2, y2] = point2;
@@ -259,7 +288,7 @@ map.on('load', function() {
                     break;
 
                     case 'rooms-ground':
-                        console.log('Creating rooms-ground-3d layer');
+                        
                         map.addLayer({
                             id: 'rooms-ground-3d',
                             type: 'fill-extrusion',
@@ -309,11 +338,9 @@ map.on('load', function() {
                             }
                         });
                         
-                        console.log('Initial opacity for rooms-ground-3d:', map.getPaintProperty('rooms-ground-3d', 'fill-extrusion-opacity'));
                         break;
                     
                     case 'rooms-basement':
-                        console.log('Creating rooms-basement-3d layer');
                         // Same structure as rooms-ground but with basement-specific IDs
                         map.addLayer({
                             id: 'rooms-basement-3d',
@@ -363,12 +390,10 @@ map.on('load', function() {
                                 'text-halo-width': 2
                             }
                         });
-                        console.log('Initial opacity for rooms-basement-3d:', map.getPaintProperty('rooms-basement-3d', 'fill-extrusion-opacity'));
                         break;
                     
                     case 'rooms-first':
                         // Same structure for first floor
-                        console.log('Creating rooms-first-3d layer');
                         map.addLayer({
                             id: 'rooms-first-3d',
                             type: 'fill-extrusion',
@@ -481,31 +506,64 @@ map.on('load', function() {
 
     // Load all data sources
     Promise.all(dataSources.map(loadDataSource))
-        .then(results => {
-            const nodesData = results.find(data => data && data.type === 'FeatureCollection' && data.features[0]?.properties.NODE_ID);
-            const edgesData = results.find(data => data && data.type === 'FeatureCollection' && data.features[0]?.properties.Start_NODE);
+    .then(results => {
+        const nodesData = results.find(data => data && data.type === 'FeatureCollection' && data.features[0]?.properties.NODE_ID);
+        const edgesData = results.find(data => data && data.type === 'FeatureCollection' && data.features[0]?.properties.Start_NODE);
 
-            if (nodesData && edgesData) {
-                const graph = buildGraph(edgesData);
-
-                
-                nodesDataGlobal = nodesData; 
-
-                graphGlobal = graph;
-                const getCurrentFloor = () => buildingFloor;
-                initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
-
-                map.once('sourcedata', () => {
-                    ['ground', 'first', 'basement', 'second'].forEach(floor => {
-                        map.setPaintProperty(`rooms-${floor}-3d`, 'fill-extrusion-opacity', 0.3);
-                    });
-                });
-                // Set up room click handler with the extracted function
-                setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+        if (nodesData && edgesData) {
+            const graph = buildGraph(edgesData);
+            nodesDataGlobal = nodesData; 
+            graphGlobal = graph;
             
-                hideLoadingScreen();
+            const getCurrentFloor = () => buildingFloor;
+
+            function setOpacities() {
+                ['ground', 'first', 'basement', 'second'].forEach(floor => {
+                    const layerId = `rooms-${floor}-3d`;
+                    if (map.getLayer(layerId)) {
+                        console.log(`Setting initial opacity for ${layerId}`);
+                        map.setPaintProperty(layerId, 'fill-extrusion-opacity', 0.3);
+                    } else {
+                        console.warn(`Layer ${layerId} not yet available`);
+                    }
+                });
+                map.triggerRepaint();
             }
-        })
+
+            function initializeLayerOpacities() {
+                if (map.isStyleLoaded()) {
+                    console.log('Style already loaded, initializing layers');
+                    setOpacities();
+                } else {
+                    console.log('Waiting for style to load');
+                    map.on('style.load', () => {
+                        console.log('Style loaded, initializing layers');
+                        setOpacities();
+                    });
+                }
+            }
+
+            // Wait for both style and source loading
+            const waitForMap = new Promise(resolve => {
+                if (map.isStyleLoaded() && map.areTilesLoaded()) {
+                    resolve();
+                } else {
+                    map.once('idle', resolve);
+                }
+            });
+
+            waitForMap.then(() => {
+                setTimeout(() => {
+                    initializeLayerOpacities();
+                    
+                    // Initialize rest of the application
+                    initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
+                    setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+                    hideLoadingScreen();
+                }, 100);
+            });
+        }
+    })
         .catch(error => {
             console.error('Error loading map data:', error);
             // Optionally show an error message on the loading screen
@@ -770,7 +828,7 @@ document.querySelectorAll('.floor-number').forEach(button => {
         // This event will only trigger on actual user clicks
         if (window.clearRouteLayers) {
             window.clearRouteLayers();
-            console.log('Route modal closed by user click');
+            
         }
     });
 });

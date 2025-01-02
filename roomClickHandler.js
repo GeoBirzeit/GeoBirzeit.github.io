@@ -40,8 +40,6 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
         floors.forEach(floor => {
             const { roomLayer, highlightLayer } = getLayerNames(floor);
             
-            console.log(`Attempting to reset floor: ${floor}`);
-            console.log(`Current opacity for ${roomLayer}:`, map.getPaintProperty(roomLayer, 'fill-extrusion-opacity'));
     
             // First ensure the layer exists and is visible
             if (map.getLayer(roomLayer) && map.getLayoutProperty(roomLayer, 'visibility') === 'visible') {
@@ -51,7 +49,6 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
                 // Then set to desired value
                 setTimeout(() => {
                     safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-opacity', 0.3);
-                    console.log(`Reset opacity for ${roomLayer} to 0.3`);
                 }, 50);
     
                 safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-color', [
@@ -63,7 +60,6 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
                     '#4CAF50' // default color
                 ]);
             } else {
-                console.log(`Layer ${roomLayer} is not visible or doesn't exist`);
             }
     
             if (map.getLayer(highlightLayer)) {
@@ -80,7 +76,6 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
         });
         
         if (features.length === 0) {
-            console.log('No room clicked, resetting floors...');
             resetAllFloors();
             selectedRoom = null;
             
