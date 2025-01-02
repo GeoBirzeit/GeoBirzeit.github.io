@@ -515,7 +515,7 @@ map.on('load', function() {
                     });
                 }
             }
-            
+
             const waitForMap = new Promise(resolve => {
                 if (map.isStyleLoaded() && map.areTilesLoaded()) {
                     resolve();
@@ -808,3 +808,60 @@ document.querySelectorAll('.floor-number').forEach(button => {
 
 
 
+function reloadRoomLayers() {
+    try {
+        if (!map) {
+            console.error('Map not initialized');
+            return;
+        }
+
+        console.log('Current floor:', buildingFloor);
+
+        // Hide all floor-related layers first
+        ['ground', 'first', 'basement', 'second'].forEach(floor => {
+            // Hide floor structure
+            map.setLayoutProperty(`${floor}-floor-3d`, 'visibility', 'none');
+            
+            // Hide and reset room layers
+            const roomLayer = `rooms-${floor}-3d`;
+            const labelLayer = `room-labels-${floor}`;
+            const highlightLayer = `highlighted-room-${floor}`;
+
+            if (map.getLayer(roomLayer)) {
+                map.setLayoutProperty(roomLayer, 'visibility', 'none');
+                map.setPaintProperty(roomLayer, 'fill-extrusion-color', [
+                    'match',
+                    ['get', 'Category'],
+                    'Room', '#4CAF50',
+                    'Elevator', '#FF9800',
+                    'Bathroom', '#2196F3',
+                    '#4CAF50'
+                ]);
+                map.setPaintProperty(roomLayer, 'fill-extrusion-opacity', 0.3);
+            }
+
+            if (map.getLayer(labelLayer)) {
+                map.setLayoutProperty(labelLayer, 'visibility', 'none');
+            }
+
+            if (map.getLayer(highlightLayer)) {
+                map.setLayoutProperty(highlightLayer, 'visibility', 'none');
+                map.setPaintProperty(highlightLayer, 'fill-extrusion-opacity', 0);
+            }
+        });
+
+        // Show current floor layers
+        map.setLayoutProperty(`${buildingFloor}-floor-3d`, 'visibility', 'visible');
+        map.setLayoutProperty(`rooms-${buildingFloor}-3d`, 'visibility', 'visible');
+        map.setLayoutProperty(`room-labels-${buildingFloor}`, 'visibility', 'visible');
+        map.setLayoutProperty(`highlighted-room-${buildingFloor}`, 'visibility', 'visible');
+        map.setLayoutProperty('stairs-3d', 'visibility', 'visible');
+
+        console.log('Rooms reloaded successfully');
+    } catch (error) {
+        console.error('Error reloading rooms:', error);
+    }
+}
+
+// Add to global scope
+window.reloadRoomLayers = reloadRoomLayers;
