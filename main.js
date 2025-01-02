@@ -488,60 +488,60 @@ map.on('load', function() {
             nodesDataGlobal = nodesData; 
             graphGlobal = graph;
             
-            const getCurrentFloor = () => buildingFloor;
-            // Wait for both style and source loading
-            function setOpacities() {
-                ['ground', 'first', 'basement', 'second'].forEach(floor => {
-                    const layerId = `rooms-${floor}-3d`;
-                    if (map.getLayer(layerId)) {
-                        console.log(`Setting initial opacity for ${layerId}`);
-                        map.setPaintProperty(layerId, 'fill-extrusion-opacity', 0.3);
-                    } else {
-                        console.warn(`Layer ${layerId} not yet available`);
+            // Remove and reload room layers
+            ['ground', 'first', 'basement', 'second'].forEach(floor => {
+                const layers = [
+                    `rooms-${floor}-3d`,
+                    `room-labels-${floor}`,
+                    `highlighted-room-${floor}`
+                ];
+                
+                layers.forEach(layer => {
+                    if (map.getLayer(layer)) {
+                        map.removeLayer(layer);
                     }
                 });
-                map.triggerRepaint();
-            }
 
-            function initializeLayerOpacities() {
-                if (map.isStyleLoaded()) {
-                    console.log('Style already loaded, initializing layers');
-                    setOpacities();
-                } else {
-                    console.log('Waiting for style to load');
-                    map.on('style.load', () => {
-                        console.log('Style loaded, initializing layers');
-                        setOpacities();
-                    });
-                }
-            }
-
-            const waitForMap = new Promise(resolve => {
-                if (map.isStyleLoaded() && map.areTilesLoaded()) {
-                    resolve();
-                } else {
-                    map.once('idle', resolve);
+                const source = `rooms-${floor}`;
+                if (map.getSource(source)) {
+                    map.removeSource(source);
                 }
             });
 
-            waitForMap.then(() => {
-                setTimeout(() => {
-                    initializeLayerOpacities();
+            // Re-fetch and add room data
+            const roomSources = [
+                { url: 'assets/Rooms_B.geojson', type: 'rooms-basement' },
+                { url: 'assets/Rooms_G.geojson', type: 'rooms-ground' },
+                { url: 'assets/Rooms_F.geojson', type: 'rooms-first' },
+                { url: 'assets/Rooms_S.geojson', type: 'rooms-second' }
+            ];
+
+            Promise.all(roomSources.map(loadDataSource))
+                .then(() => {
+                    const getCurrentFloor = () => buildingFloor;
                     
+                    function setOpacities() {
+                        ['ground', 'first', 'basement', 'second'].forEach(floor => {
+                            const layerId = `rooms-${floor}-3d`;
+                            if (map.getLayer(layerId)) {
+                                map.setPaintProperty(layerId, 'fill-extrusion-opacity', 0.3);
+                            }
+                        });
+                        map.triggerRepaint();
+                    }
+
                     // Initialize rest of the application
                     initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
-                 //   setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+                    setOpacities();
                     hideLoadingScreen();
-                }, 100);
-            });
+                });
         }
     })
-        .catch(error => {
-            console.error('Error loading map data:', error);
-            // Optionally show an error message on the loading screen
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.innerHTML = '<p>Error loading map data. Please refresh the page.</p>';
-        });
+    .catch(error => {
+        console.error('Error loading map data:', error);
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.innerHTML = '<p>Error loading map data. Please refresh the page.</p>';
+    });
 
     // Toggle View Button
     document.getElementById('toggleViewButton').addEventListener('click', function () {
@@ -808,58 +808,110 @@ document.querySelectorAll('.floor-number').forEach(button => {
 
 
 
-function reloadRoomLayers() {
+async function reloadRoomLayers() {
     try {
         if (!map) {
             console.error('Map not initialized');
             return;
         }
 
-        console.log('Current floor:', buildingFloor);
-
-        // Hide all floor-related layers first
+        // Remove existing room layers and sources
         ['ground', 'first', 'basement', 'second'].forEach(floor => {
-            // Hide floor structure
-            map.setLayoutProperty(`${floor}-floor-3d`, 'visibility', 'none');
+            const layers = [
+                `rooms-${floor}-3d`,
+                `room-labels-${floor}`,
+                `highlighted-room-${floor}`
+            ];
             
-            // Hide and reset room layers
-            const roomLayer = `rooms-${floor}-3d`;
-            const labelLayer = `room-labels-${floor}`;
-            const highlightLayer = `highlighted-room-${floor}`;
+            layers.forEach(layer => {
+                if (map.getLayer(layer)) {
+                    map.removeLayer(layer);
+                }
+            });
 
-            if (map.getLayer(roomLayer)) {
-                map.setLayoutProperty(roomLayer, 'visibility', 'none');
-                map.setPaintProperty(roomLayer, 'fill-extrusion-color', [
-                    'match',
-                    ['get', 'Category'],
-                    'Room', '#4CAF50',
-                    'Elevator', '#FF9800',
-                    'Bathroom', '#2196F3',
-                    '#4CAF50'
-                ]);
-                map.setPaintProperty(roomLayer, 'fill-extrusion-opacity', 0.3);
-            }
-
-            if (map.getLayer(labelLayer)) {
-                map.setLayoutProperty(labelLayer, 'visibility', 'none');
-            }
-
-            if (map.getLayer(highlightLayer)) {
-                map.setLayoutProperty(highlightLayer, 'visibility', 'none');
-                map.setPaintProperty(highlightLayer, 'fill-extrusion-opacity', 0);
+            const source = `rooms-${floor}`;
+            if (map.getSource(source)) {
+                map.removeSource(source);
             }
         });
 
-        // Show current floor layers
-        map.setLayoutProperty(`${buildingFloor}-floor-3d`, 'visibility', 'visible');
-        map.setLayoutProperty(`rooms-${buildingFloor}-3d`, 'visibility', 'visible');
-        map.setLayoutProperty(`room-labels-${buildingFloor}`, 'visibility', 'visible');
-        map.setLayoutProperty(`highlighted-room-${buildingFloor}`, 'visibility', 'visible');
-        map.setLayoutProperty('stairs-3d', 'visibility', 'visible');
+        // Re-fetch and add room data
+        const roomSources = [
+            { url: 'assets/Rooms_B.geojson', type: 'rooms-basement' },
+            { url: 'assets/Rooms_G.geojson', type: 'rooms-ground' },
+            { url: 'assets/Rooms_F.geojson', type: 'rooms-first' },
+            { url: 'assets/Rooms_S.geojson', type: 'rooms-second' }
+        ];
 
-        console.log('Rooms reloaded successfully');
+        for (const source of roomSources) {
+            const response = await fetch(source.url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+
+            // Add source
+            map.addSource(source.type, {
+                type: 'geojson',
+                data: data
+            });
+
+            // Get floor name from source type
+            const floor = source.type.split('-')[1];
+
+            // Add 3D room layer
+            map.addLayer({
+                id: `rooms-${floor}-3d`,
+                type: 'fill-extrusion',
+                source: source.type,
+                layout: {
+                    visibility: floor === buildingFloor ? 'visible' : 'none'
+                },
+                paint: {
+                    'fill-extrusion-color': [
+                        'match',
+                        ['get', 'Category'],
+                        'Room', '#4CAF50',
+                        'Elevator', '#FF9800',
+                        'Bathroom', '#2196F3',
+                        '#4CAF50'
+                    ],
+                    'fill-extrusion-height': 2,
+                    'fill-extrusion-base': 0,
+                    'fill-extrusion-opacity': 0.3
+                }
+            });
+
+            // Add room labels
+            map.addLayer({
+                id: `room-labels-${floor}`,
+                type: 'symbol',
+                source: source.type,
+                layout: {
+                    visibility: floor === buildingFloor ? 'visible' : 'none',
+                    'text-field': ['get', 'Room'],
+                    'text-size': 12
+                }
+            });
+
+            // Add highlight layer
+            map.addLayer({
+                id: `highlighted-room-${floor}`,
+                type: 'fill-extrusion',
+                source: source.type,
+                layout: {
+                    visibility: floor === buildingFloor ? 'visible' : 'none'
+                },
+                paint: {
+                    'fill-extrusion-color': '#FFD700',
+                    'fill-extrusion-height': 2,
+                    'fill-extrusion-base': 0,
+                    'fill-extrusion-opacity': 0
+                }
+            });
+        }
+
+        console.log('Room layers reloaded successfully');
     } catch (error) {
-        console.error('Error reloading rooms:', error);
+        console.error('Error reloading room layers:', error);
     }
 }
 
