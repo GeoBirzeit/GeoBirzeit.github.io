@@ -1,6 +1,6 @@
 import { dijkstra, buildGraph } from './dijkstra.js'; 
 import { initializeRouteModal } from './modals.js';
-import { setupRoomClickHandler } from './roomClickHandler.js';
+//import { setupRoomClickHandler } from './roomClickHandler.js';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtZWRoYWRhZCIsImEiOiJjbTNsdHBwaG4wbXo1MmxzZHQ2bGM2azFvIn0.pp7ow3gyNYL7pIA0ZQmHuw';
@@ -516,33 +516,6 @@ map.on('load', function() {
             graphGlobal = graph;
             
             const getCurrentFloor = () => buildingFloor;
-
-            function setOpacities() {
-                ['ground', 'first', 'basement', 'second'].forEach(floor => {
-                    const layerId = `rooms-${floor}-3d`;
-                    if (map.getLayer(layerId)) {
-                        console.log(`Setting initial opacity for ${layerId}`);
-                        map.setPaintProperty(layerId, 'fill-extrusion-opacity', 0.3);
-                    } else {
-                        console.warn(`Layer ${layerId} not yet available`);
-                    }
-                });
-                map.triggerRepaint();
-            }
-
-            function initializeLayerOpacities() {
-                if (map.isStyleLoaded()) {
-                    console.log('Style already loaded, initializing layers');
-                    setOpacities();
-                } else {
-                    console.log('Waiting for style to load');
-                    map.on('style.load', () => {
-                        console.log('Style loaded, initializing layers');
-                        setOpacities();
-                    });
-                }
-            }
-
             // Wait for both style and source loading
             const waitForMap = new Promise(resolve => {
                 if (map.isStyleLoaded() && map.areTilesLoaded()) {
@@ -558,7 +531,7 @@ map.on('load', function() {
                     
                     // Initialize rest of the application
                     initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
-                    setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+                 //   setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
                     hideLoadingScreen();
                 }, 100);
             });
