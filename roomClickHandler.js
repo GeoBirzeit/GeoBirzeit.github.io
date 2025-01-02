@@ -39,18 +39,37 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
     function resetAllFloors() {
         floors.forEach(floor => {
             const { roomLayer, highlightLayer } = getLayerNames(floor);
-
-            safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-color', [
-                'match',
-                ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50' // default color
-            ]);
-            safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-opacity', 0.3);
-            safeLayerUpdate(highlightLayer, 'filter', ['==', ['get', floor === 'basement' ? 'n' : 'N'], '']);
-            safeLayerUpdate(highlightLayer, 'paint', 'fill-extrusion-opacity', 0);
+            
+            console.log(`Attempting to reset floor: ${floor}`);
+            console.log(`Current opacity for ${roomLayer}:`, map.getPaintProperty(roomLayer, 'fill-extrusion-opacity'));
+    
+            // First ensure the layer exists and is visible
+            if (map.getLayer(roomLayer) && map.getLayoutProperty(roomLayer, 'visibility') === 'visible') {
+                // Force a re-render by temporarily setting to a different value
+                safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-opacity', 0.31);
+                
+                // Then set to desired value
+                setTimeout(() => {
+                    safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-opacity', 0.3);
+                    console.log(`Reset opacity for ${roomLayer} to 0.3`);
+                }, 50);
+    
+                safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-color', [
+                    'match',
+                    ['get', 'Category'],
+                    'Room', '#4CAF50',
+                    'Elevator', '#FF9800',
+                    'Bathroom', '#2196F3',
+                    '#4CAF50' // default color
+                ]);
+            } else {
+                console.log(`Layer ${roomLayer} is not visible or doesn't exist`);
+            }
+    
+            if (map.getLayer(highlightLayer)) {
+                safeLayerUpdate(highlightLayer, 'filter', ['==', ['get', floor === 'basement' ? 'n' : 'N'], '']);
+                safeLayerUpdate(highlightLayer, 'paint', 'fill-extrusion-opacity', 0);
+            }
         });
     }
 
