@@ -80,8 +80,12 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
         });
         
         if (features.length === 0) {
+            console.log('No room clicked, resetting floors...');
             resetAllFloors();
             selectedRoom = null;
+            
+            // Force a map repaint
+            map.triggerRepaint();
         }
     });
 
