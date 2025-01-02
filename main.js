@@ -34,34 +34,7 @@ const roomToNodeMapping = {
     // Add more mappings as needed
 };
 
-function initializeLayerOpacities() {
-    // Check if style is fully loaded
-    if (map.isStyleLoaded()) {
-        console.log('Style already loaded, initializing layers');
-        setOpacities();
-    } else {
-        console.log('Waiting for style to load');
-        map.on('style.load', () => {
-            console.log('Style loaded, initializing layers');
-            setOpacities();
-        });
-    }
-}
 
-function setOpacities() {
-    floors.forEach(floor => {
-        const { roomLayer, highlightLayer } = getLayerNames(floor);
-        
-        // Wait for source and layers to be actually available
-        if (map.getLayer(roomLayer)) {
-            console.log(`Setting initial opacity for ${roomLayer}`);
-            map.setPaintProperty(roomLayer, 'fill-extrusion-opacity', 0.3);
-            map.setPaintProperty(highlightLayer, 'fill-extrusion-opacity', 0);
-        } else {
-            console.warn(`Layer ${roomLayer} not yet available`);
-        }
-    });
-}
 
 function calculateDistance(point1, point2) {
     const [x1, y1] = point1;
@@ -517,6 +490,32 @@ map.on('load', function() {
             
             const getCurrentFloor = () => buildingFloor;
             // Wait for both style and source loading
+            function setOpacities() {
+                ['ground', 'first', 'basement', 'second'].forEach(floor => {
+                    const layerId = `rooms-${floor}-3d`;
+                    if (map.getLayer(layerId)) {
+                        console.log(`Setting initial opacity for ${layerId}`);
+                        map.setPaintProperty(layerId, 'fill-extrusion-opacity', 0.3);
+                    } else {
+                        console.warn(`Layer ${layerId} not yet available`);
+                    }
+                });
+                map.triggerRepaint();
+            }
+
+            function initializeLayerOpacities() {
+                if (map.isStyleLoaded()) {
+                    console.log('Style already loaded, initializing layers');
+                    setOpacities();
+                } else {
+                    console.log('Waiting for style to load');
+                    map.on('style.load', () => {
+                        console.log('Style loaded, initializing layers');
+                        setOpacities();
+                    });
+                }
+            }
+            
             const waitForMap = new Promise(resolve => {
                 if (map.isStyleLoaded() && map.areTilesLoaded()) {
                     resolve();
