@@ -1,6 +1,6 @@
 import { dijkstra, buildGraph } from './dijkstra.js'; 
 import { initializeRouteModal } from './modals.js';
-//import { setupRoomClickHandler } from './roomClickHandler.js';
+import { setupRoomClickHandler } from './roomClickHandler.js';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtZWRoYWRhZCIsImEiOiJjbTNsdHBwaG4wbXo1MmxzZHQ2bGM2azFvIn0.pp7ow3gyNYL7pIA0ZQmHuw';
@@ -489,9 +489,13 @@ map.on('load', function() {
                 const getCurrentFloor = () => buildingFloor;
                 initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
 
-                
+                map.once('idle', () => {
+                    ['ground', 'first', 'basement', 'second'].forEach(floor => {
+                        map.setPaintProperty(`rooms-${floor}-3d`, 'fill-extrusion-opacity', 0.3);
+                    });
+                });
                 // Set up room click handler with the extracted function
-                //setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+                setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
             
                 hideLoadingScreen();
             }
