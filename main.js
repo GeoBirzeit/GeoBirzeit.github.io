@@ -1,6 +1,6 @@
 import { dijkstra, buildGraph } from './dijkstra.js'; 
 import { initializeRouteModal } from './modals.js';
-import { setupRoomClickHandler } from './roomClickHandler.js';
+//import { setupRoomClickHandler } from './roomClickHandler.js';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtZWRoYWRhZCIsImEiOiJjbTNsdHBwaG4wbXo1MmxzZHQ2bGM2azFvIn0.pp7ow3gyNYL7pIA0ZQmHuw';
@@ -265,7 +265,14 @@ map.on('load', function() {
                             source: 'rooms-ground',
                             layout: { visibility: 'none' },
                             paint: {
-                                'fill-extrusion-color': '#32a852',
+                                'fill-extrusion-color': [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50' // default color if category doesn't match
+            ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
                                 'fill-extrusion-base': 0
@@ -310,7 +317,14 @@ map.on('load', function() {
                             source: 'rooms-basement',
                             layout: { visibility: 'none' },
                             paint: {
-                                'fill-extrusion-color': '#32a852',
+                                'fill-extrusion-color': [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50' // default color if category doesn't match
+            ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
                                 'fill-extrusion-base': 0
@@ -355,7 +369,14 @@ map.on('load', function() {
                             source: 'rooms-first',
                             layout: { visibility: 'none' },
                             paint: {
-                                'fill-extrusion-color': '#32a852',
+                                'fill-extrusion-color': [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50' // default color if category doesn't match
+            ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
                                 'fill-extrusion-base': 0
@@ -400,7 +421,14 @@ map.on('load', function() {
                             source: 'rooms-second',
                             layout: { visibility: 'none' },
                             paint: {
-                                'fill-extrusion-color': '#32a852',
+                                'fill-extrusion-color': [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50' // default color if category doesn't match
+            ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
                                 'fill-extrusion-base': 0
@@ -463,7 +491,7 @@ map.on('load', function() {
 
                 
                 // Set up room click handler with the extracted function
-                setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
+                //setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
             
                 hideLoadingScreen();
             }
@@ -595,6 +623,8 @@ document.addEventListener('DOMContentLoaded', () => {
 floorNumberButtons.forEach(button => {
     button.addEventListener('click', () => {
         const floor = button.dataset.floor;
+        map.flyTo({ center: [35.1826, 31.96065], zoom: 19.5 });
+        currentView = 'floor-view';
         
         buildingFloor = floor;
         console.log('Updated Current Floor:', buildingFloor);
@@ -643,7 +673,14 @@ floorNumberButtons.forEach(button => {
             map.setLayoutProperty('highlighted-room-ground', 'visibility', 'visible');
             
             // Reset room colors and highlighting
-            map.setPaintProperty('rooms-ground-3d', 'fill-extrusion-color', '#32a852');
+            map.setPaintProperty('rooms-ground-3d', 'fill-extrusion-color', [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50'
+            ]);
             map.setPaintProperty('rooms-ground-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-ground', ['==', ['get', 'N'], '']);
             map.setPaintProperty('highlighted-room-ground', 'fill-extrusion-opacity', 0);
@@ -657,7 +694,14 @@ floorNumberButtons.forEach(button => {
             map.setLayoutProperty('highlighted-room-first', 'visibility', 'visible');
             
             // Reset room colors and highlighting
-            map.setPaintProperty('rooms-first-3d', 'fill-extrusion-color', '#32a852');
+            map.setPaintProperty('rooms-first-3d', 'fill-extrusion-color', [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50'
+            ]);
             map.setPaintProperty('rooms-first-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-first', ['==', ['get', 'N'], '']);
             map.setPaintProperty('highlighted-room-first', 'fill-extrusion-opacity', 0);
@@ -671,7 +715,14 @@ floorNumberButtons.forEach(button => {
             map.setLayoutProperty('highlighted-room-basement', 'visibility', 'visible');
             
             // Reset room colors and highlighting
-            map.setPaintProperty('rooms-basement-3d', 'fill-extrusion-color', '#32a852');
+            map.setPaintProperty('rooms-basement-3d', 'fill-extrusion-color', [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50'
+            ]);
             map.setPaintProperty('rooms-basement-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-basement', ['==', ['get', 'n'], '']);
             map.setPaintProperty('highlighted-room-basement', 'fill-extrusion-opacity', 0);
@@ -685,7 +736,14 @@ floorNumberButtons.forEach(button => {
             map.setLayoutProperty('highlighted-room-second', 'visibility', 'visible');
             
             // Reset room colors and highlighting
-            map.setPaintProperty('rooms-second-3d', 'fill-extrusion-color', '#32a852');
+            map.setPaintProperty('rooms-second-3d', 'fill-extrusion-color', [
+                'match',
+                ['get', 'Category'],
+                'Room', '#4CAF50',
+                'Elevator', '#FF9800',
+                'Bathroom', '#2196F3',
+                '#4CAF50'
+            ]);
             map.setPaintProperty('rooms-second-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-second', ['==', ['get', 'N'], '']);
             map.setPaintProperty('highlighted-room-second', 'fill-extrusion-opacity', 0);
