@@ -271,10 +271,10 @@ map.on('load', function() {
                                 'fill-extrusion-color': [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50' // default color if category doesn't match
+                'Room', '#E5E2CE',
+                'Elevator', '#B58B69',
+                'Bathroom', '#C4B470',
+                '#E5E2CE' // default color if category doesn't match
             ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
