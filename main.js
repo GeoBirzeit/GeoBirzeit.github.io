@@ -272,7 +272,7 @@ map.on('load', function() {
                 'match',
                 ['get', 'Category'],
                 'Room', '#E6D5CC',
-                'Elevator', '#E5E6E6',
+                'Elevator', '#E60000',
                 'Bathroom', '#9EBBD7',
                 '#E6D5CC' // default color if category doesn't match
             ],
