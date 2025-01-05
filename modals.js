@@ -160,7 +160,7 @@ const doctorsData = [
     // English names
     { name: "Secretary", nodeId: "NODE_063" },
     { name: "Abdel Halim Tumeiza", nodeId: "NODE_062" },
-    { name: "Marwan Ghaleb Marwan Ghaleb Abdelmohsen Ghaleb", nodeId: "NODE_066" },
+    { name: "Marwan Ghanem", nodeId: "NODE_066" },
     { name: "Othman Ali Othman Sharkas", nodeId: "NODE_069" },
     { name: "Mohammad Tayseer Mohammad Kattaneh", nodeId: "NODE_069" },
     { name: "Hussein Ahmad Hussein Rimawi", nodeId: "NODE_071" },
@@ -172,7 +172,7 @@ const doctorsData = [
     // Arabic names
     { name: "سكرتيرة", nodeId: "NODE_063" },
     { name: "عبد الحليم طميزة", nodeId: "NODE_062" },
-    { name: "مروان غالب مروان غالب عبدالمحسن غالب", nodeId: "NODE_066" },
+    { name: "مروان غانم", nodeId: "NODE_066" },
     { name: "عثمان علي عثمان شركس", nodeId: "NODE_069" },
     { name: "محمد تيسير محمد كتانة", nodeId: "NODE_069" },
     { name: "حسين أحمد حسين ريماوي", nodeId: "NODE_071" },
@@ -211,17 +211,17 @@ const roomsData = [
     { name: "A.Shaheen - Lab - 232", nodeId: "NODE_059" },
     { name: "A.Shaheen - Lab - 233", nodeId: "NODE_060" },
     { name: "Printing Press of Arts", nodeId: "NODE_037" },
-    { name: "Male Prayer Room", nodeId: "NODE_119" },
-    { name: "Female Prayer Room", nodeId: "NODE_121" },
+    { name: "A.Shaheen - Male Prayer Room", nodeId: "NODE_119" },
+    { name: "A.Shaheen - Female Prayer Room", nodeId: "NODE_121" },
     { name: "Arts Cafeteria", nodeId: "NODE_102" },
     { name: "Arts Cafeteria", nodeId: "NODE_105" },
-    { name: "Geography Library", nodeId: "NODE_089" },
+    { name: "A.Shaheen - Geography Library", nodeId: "NODE_089" },
 
     // Arabic names
-    { name: "A.Shaheen - المدخل الرئيسي", nodeId: "NODE_014" },
+    { name: "عزيز شاهين - المدخل الرئيسي", nodeId: "NODE_014" },
     { name: "مطبعة الاداب", nodeId: "NODE_037" },
-    { name: "مصلى الذكور", nodeId: "NODE_119" },
-    { name: "مصلى الاناث", nodeId: "NODE_121" },
+    { name: "عزيز شاهين - مصلى الذكور", nodeId: "NODE_119" },
+    { name: "عزيز شاهين - مصلى الاناث", nodeId: "NODE_121" },
     { name: "كافيتيريا الاداب", nodeId: "NODE_102" },
     { name: "كافيتيريا الاداب", nodeId: "NODE_105" },
     { name: "مكتبة الجغرافيا", nodeId: "NODE_089" }
@@ -247,9 +247,12 @@ const departmentData = [
 
 const othersData = [
     // English names
+    { name: "West Gate", nodeId: "NODE_338" },
+    { name: "East Gate", nodeId: "NODE_596" },
+    { name: "South Gate", nodeId: "NODE_567" },
     { name: "Abu Ahmed Cafeteria", nodeId: "NODE_642" },
     { name: "Al-Zaim Cafeteria", nodeId: "NODE_334" },
-    { name: "The Bank", nodeId: "NODE_289" },
+    { name: "Palestine Bank", nodeId: "NODE_289" },
     { name: "Al-Sheni store", nodeId: "NODE_288" },
     { name: "Sheikh Rashid Bin Saeed Al Maktoum Building / Student Complex", nodeId: "NODE_633" },
     { name: "Deanship of Student Affairs", nodeId: "NODE_618" },
@@ -267,9 +270,12 @@ const othersData = [
     { name: "Electric Generator", nodeId: "NODE_313" },
 
     // Arabic names
+    { name: "المدخل الغربي", nodeId: "NODE_338" },
+    { name: "المدخل الشرقي", nodeId: "NODE_596" },
+    { name: "المدخل الجنوبي", nodeId: "NODE_567" },
     { name: "كافتيريا ابو احمد", nodeId: "NODE_642" },
     { name: "كافتيريا الزعيم", nodeId: "NODE_334" },
-    { name: "البنك", nodeId: "NODE_289" },
+    { name: "بنك فلسطين", nodeId: "NODE_289" },
     { name: "الشني", nodeId: "NODE_288" },
     { name: "الشيخ راشد بن سعيد مبنى آل مكتوم / مجمع الطلاب", nodeId: "NODE_633" },
     { name: "عمادة شؤون الطلبة", nodeId: "NODE_618" },

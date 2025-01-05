@@ -663,7 +663,7 @@ document.addEventListener('DOMContentLoaded', () => {
 floorNumberButtons.forEach(button => {
     button.addEventListener('click', () => {
         const floor = button.dataset.floor;
-        map.flyTo({ center: [35.1826, 31.96065], zoom: 19.5 });
+        
         currentView = 'floor-view';
         
         buildingFloor = floor;
@@ -798,6 +798,7 @@ floorNumberButtons.forEach(button => {
 document.querySelectorAll('.floor-number').forEach(button => {
     button.addEventListener('mousedown', (e) => {
         // This event will only trigger on actual user clicks
+        map.flyTo({ center: [35.1826, 31.96065], zoom: 19.5 });
         if (window.clearRouteLayers) {
             window.clearRouteLayers();
             
