@@ -15,7 +15,7 @@ export function dijkstra(graph, nodesData, start, end,timeData ) {
     Object.keys(graph).forEach(node => {
         // Skip completely if node is inaccessible, but allow if it's the start or end node
         if (nodeAccessLookup[node] === 'true' && node !== start && node !== end) {
-            console.log(`Skipping completely inaccessible node: ${node}`);
+            
             return;
         }
 
@@ -89,16 +89,16 @@ export function dijkstra(graph, nodesData, start, end,timeData ) {
 
     const totalLength = distances[end];
     if (totalLength !== Infinity) {
-        console.log('Total route length:', totalLength, 'meters');
+        
 
         // Calculate estimated arrival time
         const timeSeconds = totalLength / 1.4;
         timeData.minutes = Math.floor(timeSeconds / 60);
         timeData.seconds = Math.floor(timeSeconds % 60);
 
-        console.log(`Estimated arrival time: ${timeData.minutes} minutes and ${timeData.seconds} seconds`);
+        
     } else {
-        console.log('No path found to the end node.');
+        
         timeData.minutes = null;
         timeData.seconds = null;
         return [];
@@ -126,7 +126,7 @@ export function dijkstra(graph, nodesData, start, end,timeData ) {
         }
     }
 
-    console.log(path);
+    
 
     return path;
 }
