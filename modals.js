@@ -974,9 +974,9 @@ currentMarker.on('dragend', () => {
             }
         }
        // Set up category buttons
+// Set up category buttons
 document.querySelectorAll('.category-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        
         const category = btn.dataset.category;
         const inputType = btn.dataset.input;
         
@@ -993,37 +993,67 @@ document.querySelectorAll('.category-btn').forEach(btn => {
             if (currentMarker) {
                 currentMarker.remove(); 
             }
-            fromNodeInput.value = ''; // Clear the input field
-            fromNodeId.value = ''; // Clear the hidden input
-            fromNodeDropdown.style.display = 'none'; // Hide the dropdown
+            fromNodeInput.value = ''; 
+            fromNodeId.value = ''; 
+            fromNodeDropdown.style.display = 'none';
             currentFromCategory = category;
         } else {
-            toNodeInput.value = ''; // Clear the input field
-            toNodeId.value = ''; // Clear the hidden input
-            toNodeDropdown.style.display = 'none'; // Hide the dropdown
+            toNodeInput.value = ''; 
+            toNodeId.value = ''; 
+            toNodeDropdown.style.display = 'none';
             currentToCategory = category;
         }
 
-        // Update dropdown (will be empty since input is cleared)
+        // Update dropdown
         if (inputType === 'from') {
             updateDropdown(fromNodeInput, fromNodeDropdown, fromNodeId, category, '');
         } else {
             updateDropdown(toNodeInput, toNodeDropdown, toNodeId, category, '');
         }
+
+        // Remove any existing one-time click listener
+        if (window.oneTimeClickListener) {
+            document.removeEventListener('click', window.oneTimeClickListener);
+        }
+
+        // Create new one-time click listener
+        window.oneTimeClickListener = function(event) {
+            const isClickInsideFrom = fromNodeDropdown.contains(event.target) || 
+                                    fromNodeInput.contains(event.target);
+            const isClickInsideTo = toNodeDropdown.contains(event.target) || 
+                                  toNodeInput.contains(event.target);
+            const isClickInsideButton = event.target.closest('.category-btn');
+
+            // Only hide if click is outside dropdowns, inputs, and category buttons
+            if (!isClickInsideFrom && !isClickInsideTo && !isClickInsideButton) {
+                fromNodeDropdown.style.display = 'none';
+                toNodeDropdown.style.display = 'none';
+                
+                // Remove active class from all category buttons
+                
+
+                // Remove this one-time listener
+                document.removeEventListener('click', window.oneTimeClickListener);
+                window.oneTimeClickListener = null;
+            }
+        };
+
+        // Add the one-time click listener
+        // Use setTimeout to avoid immediate triggering
+        setTimeout(() => {
+            document.addEventListener('click', window.oneTimeClickListener);
+        }, 0);
     });
 });
 
+// Keep the input listeners
+fromNodeInput.addEventListener('input', (e) => {
+    updateDropdown(fromNodeInput, fromNodeDropdown, fromNodeId, currentFromCategory, e.target.value);
+});
 
-
- 
-        // Set up input listeners
-        fromNodeInput.addEventListener('input', (e) => {
-            updateDropdown(fromNodeInput, fromNodeDropdown, fromNodeId, currentFromCategory, e.target.value);
-        });
-    
-        toNodeInput.addEventListener('input', (e) => {
-            updateDropdown(toNodeInput, toNodeDropdown, toNodeId, currentToCategory, e.target.value);
-        });
+toNodeInput.addEventListener('input', (e) => {
+    updateDropdown(toNodeInput, toNodeDropdown, toNodeId, currentToCategory, e.target.value);
+});
     
 
 
