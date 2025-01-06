@@ -1028,9 +1028,7 @@ document.querySelectorAll('.category-btn').forEach(btn => {
             if (!isClickInsideFrom && !isClickInsideTo && !isClickInsideButton) {
                 fromNodeDropdown.style.display = 'none';
                 toNodeDropdown.style.display = 'none';
-                
-                // Remove active class from all category buttons
-                
+
 
                 // Remove this one-time listener
                 document.removeEventListener('click', window.oneTimeClickListener);

@@ -19,10 +19,10 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
                 safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-color', [
                     'match',
                     ['get', 'Category'],
-                    'Room', '#4CAF50',
-                    'Elevator', '#FF9800',
-                    'Bathroom', '#2196F3',
-                    '#4CAF50' // default color
+                    'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
                 ]);
                 safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-opacity', 0.3);
                 safeLayerUpdate(highlightLayer, 'paint', 'fill-extrusion-opacity', 0);
@@ -54,10 +54,10 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
                 safeLayerUpdate(roomLayer, 'paint', 'fill-extrusion-color', [
                     'match',
                     ['get', 'Category'],
-                    'Room', '#4CAF50',
-                    'Elevator', '#FF9800',
-                    'Bathroom', '#2196F3',
-                    '#4CAF50' // default color
+                    'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
                 ]);
             } else {
             }
@@ -200,10 +200,10 @@ export function setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, n
                 [
                     'match',
                     ['get', 'Category'],
-                    'Room', '#4CAF50',
-                    'Elevator', '#FF9800',
-                    'Bathroom', '#2196F3',
-                    '#4CAF50' // default color
+                    'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
                 ]
             ]);
             // Update highlighted room

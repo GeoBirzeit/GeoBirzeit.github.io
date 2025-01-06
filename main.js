@@ -1,6 +1,6 @@
 import { dijkstra, buildGraph } from './dijkstra.js'; 
 import { initializeRouteModal } from './modals.js';
-//import { setupRoomClickHandler } from './roomClickHandler.js';
+import { setupRoomClickHandler } from './roomClickHandler.js';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtZWRoYWRhZCIsImEiOiJjbTNsdHBwaG4wbXo1MmxzZHQ2bGM2azFvIn0.pp7ow3gyNYL7pIA0ZQmHuw';
@@ -324,10 +324,10 @@ map.on('load', function() {
                                 'fill-extrusion-color': [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50' // default color if category doesn't match
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' // default color if category doesn't match
             ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
@@ -376,10 +376,10 @@ map.on('load', function() {
                                 'fill-extrusion-color': [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50' // default color if category doesn't match
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' // default color if category doesn't match
             ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
@@ -428,10 +428,10 @@ map.on('load', function() {
                                 'fill-extrusion-color': [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50' // default color if category doesn't match
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' // default color if category doesn't match
             ],
                                 'fill-extrusion-opacity': 0.3,
                                 'fill-extrusion-height': 2,
@@ -532,6 +532,7 @@ map.on('load', function() {
 
                     // Initialize rest of the application
                     initializeRouteModal(map, graph, nodesData, dijkstra, getCurrentFloor);
+                    setupRoomClickHandler(map, roomToNodeMapping, findClosestNode, nodesDataGlobal, getCurrentFloor);
                     setOpacities();
                     hideLoadingScreen();
                 });
@@ -716,10 +717,10 @@ floorNumberButtons.forEach(button => {
             map.setPaintProperty('rooms-ground-3d', 'fill-extrusion-color', [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50'
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
             ]);
             map.setPaintProperty('rooms-ground-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-ground', ['==', ['get', 'N'], '']);
@@ -737,10 +738,10 @@ floorNumberButtons.forEach(button => {
             map.setPaintProperty('rooms-first-3d', 'fill-extrusion-color', [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50'
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
             ]);
             map.setPaintProperty('rooms-first-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-first', ['==', ['get', 'N'], '']);
@@ -758,10 +759,10 @@ floorNumberButtons.forEach(button => {
             map.setPaintProperty('rooms-basement-3d', 'fill-extrusion-color', [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50'
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
             ]);
             map.setPaintProperty('rooms-basement-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-basement', ['==', ['get', 'n'], '']);
@@ -779,10 +780,10 @@ floorNumberButtons.forEach(button => {
             map.setPaintProperty('rooms-second-3d', 'fill-extrusion-color', [
                 'match',
                 ['get', 'Category'],
-                'Room', '#4CAF50',
-                'Elevator', '#FF9800',
-                'Bathroom', '#2196F3',
-                '#4CAF50'
+                'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
             ]);
             map.setPaintProperty('rooms-second-3d', 'fill-extrusion-opacity', 0.3);
             map.setFilter('highlighted-room-second', ['==', ['get', 'N'], '']);
@@ -870,10 +871,10 @@ async function reloadRoomLayers() {
                     'fill-extrusion-color': [
                         'match',
                         ['get', 'Category'],
-                        'Room', '#4CAF50',
-                        'Elevator', '#FF9800',
-                        'Bathroom', '#2196F3',
-                        '#4CAF50'
+                        'Room', '#D7B09E',
+                'Elevator', '#737300',
+                'Bathroom', '#004C73',
+                '#D7B09E' 
                     ],
                     'fill-extrusion-height': 2,
                     'fill-extrusion-base': 0,
