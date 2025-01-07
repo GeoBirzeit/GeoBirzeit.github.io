@@ -191,8 +191,6 @@ const roomsData = [
     { name: "A.Shaheen - Class - 116", nodeId: "NODE_010" },
     { name: "A.Shaheen - Class - 150", nodeId: "NODE_038" },
     { name: "A.Shaheen - Class - 152", nodeId: "NODE_025" },
-    { name: "A.Shaheen - Class - 152", nodeId: "NODE_027" },
-    { name: "A.Shaheen - Class - 162", nodeId: "NODE_021" },
     { name: "A.Shaheen - Class - 162", nodeId: "NODE_017" },
     { name: "A.Shaheen - Class - 202", nodeId: "NODE_086" },
     { name: "A.Shaheen - Class - 206", nodeId: "NODE_088" },
